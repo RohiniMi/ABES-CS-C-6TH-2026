@@ -7,12 +7,17 @@ export const readJsonFile = async (path) => {
         console.log("unable to read data");
     }
 }
-export const writeJsonFile = async(path, data)=>{
+export const writeJsonFile = async (path, data) => {
+    let status = 0;
+    let message = "";
     try {
-        await fs.writeFile(path,JSON.stringify(data,2,null));
-        console.log("Data has been written successfully");       
+        await fs.writeFile(path, JSON.stringify(data, null,2));
+        status = 200;
+        message = "Data has been written successfully";
     } catch (error) {
-        console.log("unable to write");     
+        status = 500;
+        message ="unable to write";
     }
+    return {status,message}
 }
 
